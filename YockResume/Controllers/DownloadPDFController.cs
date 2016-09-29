@@ -30,8 +30,9 @@ namespace YockResume.Controllers
         {
             WebClient wc = new WebClient();
             //從網址下載Html字串
-            string htmlText = ToBase64("http://localhost:59340/html/PDFprint_resume.html");
+            //string htmlText = ToBase64("http://yockresumeonline.apphb.com/html/PDFprint_resume.html");
 
+            string htmlText = Server.MapPath("../html/PDFprint_resume.html"); 
             htmlText = wc.DownloadString(htmlText);
             byte[] pdfFile = this.ConvertHtmlTextToPDF(htmlText);     //Html轉為PDF
             //byte[] pdfFile = this.CreateTextToPDF();                    //自己寫PDF
