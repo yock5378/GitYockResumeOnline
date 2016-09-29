@@ -1,0 +1,318 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Yock's Resume</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+
+    <style type="text/css">
+        .picPosition {
+            position: absolute;
+            width: 50%;
+            top: 0%;
+            left: 25%;
+            z-index: 3;
+        }
+
+        .Reply_imgPostion {
+            position: absolute;
+            width: 50%;
+            top: 0%;
+            left: 25%;
+            z-index: 1;
+        }
+
+        .replyTextPostion {
+            position: absolute;
+            width: 40%;
+            top: 10%;
+            left: 30%;
+            margin-right: 60px;
+            z-index: 2;
+        }
+
+        .Reply_imgNewPostion {
+            position: absolute;
+            width: 50%;
+            top: 25%;
+            left: 0%;
+            z-index: 1;
+        }
+
+        .replyTextNewPostion {
+            position: absolute;
+            width: 40%;
+            top: 35%;
+            left: 5%;
+            margin-right: 60px;
+            z-index: 2;
+        }
+
+        .Question_imgPostion {
+            position: absolute;
+            width: 50%;
+            top: 0%;
+            left: 100%;
+            z-index: 1;
+        }
+
+        .questionTextPostion {
+            position: absolute;
+            width: 42%;
+            top: 8%;
+            left: 105%;
+            margin-right: 60px;
+            z-index: 2;
+        }
+
+        .q1ImgPostion {
+            position: absolute;
+            width: 30%;
+            top: 0%;
+            left: 0%;
+            z-index: 2;
+        }
+
+        .q2ImgPostion {
+            position: absolute;
+            width: 30%;
+            top: 0%;
+            left: 70%;
+            z-index: 2;
+        }
+
+        .q3ImgPostion {
+            position: absolute;
+            width: 30%;
+            top: 0%;
+            left: 15%;
+            z-index: 2;
+        }
+
+        .q4ImgPostion {
+            position: absolute;
+            width: 30%;
+            top: 0%;
+            left: 55%;
+            z-index: 2;
+        }
+
+        .q1TextPostion {
+            position: absolute;
+            margin-top: 1%;
+            margin-left: 6%;
+            z-index: 1;
+        }
+
+        .q2TextPostion {
+            position: absolute;
+            margin-top: 1%;
+            margin-left: 76%;
+            z-index: 1;
+        }
+
+        .q3TextPostion {
+            position: absolute;
+            margin-top: 1%;
+            margin-left: 21%;
+            z-index: 1;
+        }
+
+        .q4TextPostion {
+            position: absolute;
+            margin-top: 1%;
+            margin-left: 61%;
+            z-index: 1;
+        }
+
+        .midStyle {
+            position: relative;
+            max-width: 1200px;
+            min-width: 1200px;
+            max-height: 850px;
+            min-height: 850px;
+            margin: 0 auto;
+        }
+
+        .downStyle {
+            position: relative;
+            max-width: 1100px;
+            min-width: 1100px;
+            max-height: 120px;
+            min-height: 120px;
+            margin: 0 auto;
+        }
+
+        .fontStyle {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .unDisplayStyle {
+            display: none;
+        }
+
+        .DisplayStyle {
+            display: block;
+        }
+
+        .clearfix {
+            overflow: auto;
+            zoom: 1;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="midStyle testmode">
+        <br />
+        <img id="YC_img" src="../images/YC.jpg" alt="an image" class="picPosition">
+        <img id="Reply_img" src="../images/Reply.png" alt="an image" class="Reply_imgPostion">
+        <img id="Question_img" src="../images/Question.png" alt="an image" class="Question_imgPostion unDisplayStyle">
+        <span id="Reply_txt" class="replyTextPostion fontStyle"></span>
+        <span id="Question_txt" class="questionTextPostion fontStyle unDisplayStyle"></span>
+    </div>
+
+    <div class="downStyle clearfix testmode">
+        <br />
+        <span id="q1" name="q_text" class="q1TextPostion fontStyle"></span>
+        <span id="q2" name="q_text" class="q2TextPostion fontStyle"></span>
+        <img id="q1img" name="q_img" src="../images/QuestionL.png" alt="an image" class="q1ImgPostion">
+        <img id="q2img" name="q_img" src="../images/QuestionR.png" alt="an image" class="q2ImgPostion">
+    </div>
+
+    <div class="downStyle clearfix testmode">
+        <br />
+        <span id="q3" name="q_text" class="q3TextPostion fontStyle"></span>
+        <span id="q4" name="q_text" class="q4TextPostion fontStyle"></span>
+        <img id="q3img" name="q_img" src="../images/QuestionL.png" alt="an image" class="q3ImgPostion">
+        <img id="q4img" name="q_img" src="../images/QuestionR.png" alt="an image" class="q4ImgPostion">
+    </div>
+
+
+
+    <script>
+        $(function () {
+            var action_doing = false;   //動畫途中不再做其他動作
+            var clickEnable = false;    //有點下就不再做開關
+            var clickKeep;              //記住被按下的按鍵
+            var content_array;          //ajax讀出json中的陣列
+
+            $.ajax({
+                url: '/Home/LoadJson',
+                data: {},
+                type: 'get',
+                cache: false,
+                async: false,
+                success: function (response) {
+                    //console.log(response);
+                    content_array = response;
+                }
+            });
+
+            //填入下方question文字
+            for (i = 0; i < 4; i++) {
+                $("span[name = q_text]").eq(i).html(content_array[i].question);
+            }
+
+
+            //滑鼠移入移出點擊做的動作
+            $("img[name = q_img]").mouseover(function () {
+                var Target = $(this).attr("id").substr(1, 1);
+                animate_open(Target, clickEnable);
+            }).mouseout(function () {
+                animate_close(clickEnable);
+            }).click(function () {
+                if (!action_doing) {
+                    var Target = $(this).attr("id").substr(1, 1);
+                    action_doing = true;
+                    clickEnable = true;
+                    animate_QAaction(Target);
+                    animate_inout(Target, clickKeep);
+                    clickKeep = Target;
+                }
+            })
+
+            //移入時展開
+            function animate_open(num, enable) {
+                if (enable == false)
+                {
+                    ReplyText_load(num);
+                    $("#YC_img").animate({ left: "0%" }, { queue: false });
+                    $("#Reply_img").animate({ left: "50%" }, { queue: false });
+                    $("#Reply_txt").animate({ left: "55%" }, { queue: false });
+                }
+            }
+
+            //移出時闔入
+            function animate_close(enable) {
+                if (enable == false)
+                {
+                    $("#YC_img").animate({ left: "25%" }, { queue: false });
+                    $("#Reply_img").animate({ left: "25%" }, { queue: false });
+                    $("#Reply_txt").animate({ left: "25%" }, { queue: false });
+                }
+            }
+
+            //點選時此按鍵淡出，原按鍵淡入
+            function animate_inout(action_in, action_out) {
+                if(action_in != null) {
+                    $("img[name = q_img]").eq(action_in-1).fadeOut(1000);
+                    $("span[name = q_text]").eq(action_in-1).fadeOut(1000, function(){
+                        action_doing = false;
+                    })
+                }
+                if (action_out != null) {
+                    $("img[name = q_img]").eq(action_out-1).fadeIn(1000);
+                    $("span[name = q_text]").eq(action_out-1).fadeIn(1000);
+                }
+            }
+
+            //點選時原問答淡出，新問題出現，新回答出現
+            function animate_QAaction(newNum) {
+                $("#Question_img").fadeOut(200);
+                $("#Question_txt").fadeOut(200);
+                $("#Reply_img").fadeOut(200);
+                $("#Reply_txt").fadeOut(200, function () {
+                    $("#Question_img").css("left", "");
+                    $("#Question_txt").css("left", "");
+                    QuestionText_load(newNum);
+                    $("#Question_img").fadeIn({ queue: false, duration: 600 }).animate({ left: "50%" }, 600);
+                    $("#Question_txt").fadeIn({ queue: false, duration: 600 }).animate({ left: "57%" }, 600, function () {
+                        ReplyText_load(newNum);
+                        $("#Reply_img").css("left", "");
+                        $("#Reply_txt").css("left", "");
+                        $("#Reply_img").removeClass("Reply_imgPostion").addClass("Reply_imgNewPostion");
+                        $("#Reply_txt").removeClass("replyTextPostion").addClass("replyTextNewPostion");
+                        $("#Reply_img").fadeIn({ queue: false, duration: 600 }).animate({ left: "50%" }, 600);
+                        $("#Reply_txt").fadeIn({ queue: false, duration: 600 }).animate({ left: "55%" }, 600);
+                    });
+                });
+            }
+
+            function QuestionText_load(loadNum) {
+                if (loadNum != null)
+                    $("#Question_txt").html(content_array[loadNum - 1].question);
+            };
+
+            function ReplyText_load(loadNum) {
+                if(loadNum != null)
+                    $("#Reply_txt").html(content_array[loadNum - 1].reply);
+            };
+
+        });
+    </script>
+
+</body>
+</html>

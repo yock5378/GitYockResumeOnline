@@ -1,0 +1,22 @@
+﻿@using Microsoft.AspNet.Identity
+@using YockResume.Utils
+
+
+<ul class="nav navbar-nav">
+    <li class="@(Html.IsCurrentController("Resume") ? "active" : "")">
+        <a href="@Url.Action("Index", "Resume")" class="btn">
+            __2__
+        </a>
+    </li>
+    <li class="@(Html.IsCurrentController("Autobiography") ? "active" : "")">
+        <a href="@Url.Action("Index", "Autobiography")" class="btn">
+            __3__
+        </a>
+    </li>
+    <li class="@(Html.IsCurrentController("Contact") ? "active" : "")">
+        <a href="@Url.Action("Index", "Contact")" class="btn">
+            __4__
+        </a>
+    </li>
+</ul>
+ 
