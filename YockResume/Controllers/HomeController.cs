@@ -40,9 +40,10 @@ namespace YockResume.Controllers
 
         public JsonResult LoadJson()
         {
-            using (StreamReader r = new StreamReader("../json/content.json"))
-            {
-                string json = r.ReadToEnd();
+            string filepath = Server.MapPath("../json/content.json"); 
+            using (StreamReader sr = new StreamReader(filepath))
+            {  
+                string json = sr.ReadToEnd();
                 List<Item> items = JsonConvert.DeserializeObject<List<Item>>(json);
                 return Json(items, JsonRequestBehavior.AllowGet);
             }
