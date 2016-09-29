@@ -216,8 +216,17 @@
     <Content Include="Content\Site.css" />
     <Content Include="html\PDFprint_resume.html" />
     <Content Include="html\PDFprint_test.html" />
+    <Content Include="images\BG.jpg" />
+    <Content Include="images\Question.png" />
+    <Content Include="images\QuestionL.png" />
+    <Content Include="images\QuestionR.png" />
+    <Content Include="images\Reply.png" />
+    <Content Include="images\YC.jpg" />
+    <Content Include="images\YC_.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="json\content.json" />
+    <Content Include="json\contentTest.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
