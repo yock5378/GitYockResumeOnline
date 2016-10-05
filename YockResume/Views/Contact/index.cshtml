@@ -2,24 +2,272 @@
     Layout = null;
 }*@
 
-<!DOCTYPE html>
+@model YockResume.Models.UserContact
 
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Yock's Resume</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/MicrosoftMvc")
-    @Scripts.Render("~/bundles/jqueryTemplates")
+@{
+    ViewBag.Title = "Contact me";
+}
 
 
 
-</head>
-<body>
-</body>
-</html>
+    @*表單驗證*@
+    @Scripts.Render("~/bundles/jqueryval")
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+
+    <script type="text/javascript" src="../Tools/FromJqueryValidation/additional-methods.min.js"></script>
+    <script type="text/javascript" src="../Tools/FromJqueryValidation/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="../Tools/FromJqueryValidation/messages_zh_TW.min.js"></script>
+
+    
+
+
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <style type="text/css">
+        #box {
+            border: 1px solid rgb(200, 200, 200);
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 5px 2px;
+            background: rgba(200, 200, 200, 0.5);
+            border-radius: 4px;
+            top: 50px;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .modal {
+            /*   display: block;*/
+            padding-right: 0px;
+            background-color: rgba(4, 4, 4, 0.3);
+        }
+
+        .modal-dialog {
+            top: 60%;
+            width: 60%;
+            position: absolute;
+        }
+
+        .modal-content {
+            border-radius: 0px;
+            border: none;
+            top: 40%;
+        }
+
+        .modal-body {
+            background-color: #0f8845;
+            color: white;
+        }
+
+        .row {
+            margin: 10px;
+        }
+
+        .font-red {
+            color: red;
+        }
+
+    </style>
+
+
+    @*From http://bootsnipp.com/snippets/featured/windows-8-bootstrap-modals*@
+    <div class="container">
+        <div class="row">
+            <!-- Large modal -->
+            <button id="fakebutton" style="display:none" type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">FakeButton</button>
+
+            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <h1>信息傳送成功!</h1>
+                            <h3>我會以最快的速度回復您!</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <br />
+    <div style='text-align:center; height:80px;' class="testmode"><h1>聯絡方式</h1></div>
+    <p><div class="testmode"><h3>聯絡電話: 0978901805</h3></div></p>
+    <p><div class="testmode"><h3>聯絡地址: 新北市汐止區合順街84號2F-5</h3></div></p>
+    <p><div class="testmode"><h3>電子信箱: yock5378@gmail.com</h3></div></p>
+
+    @*From http://bootsnipp.com/snippets/0l3yR*@
+    <div style='height:560px;' class="container-fluid testmode">
+        <div class="row-fluid">
+            <div class="col-md-offset-1 col-md-4" id="box">
+                <h2>寫信給我</h2>
+
+                <hr>
+                @using (Html.BeginForm("CreateData", "Contact"))
+                {
+
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Name" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "E-mail" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control", @placeholder = "Phone number" } })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                @Html.TextAreaFor(model => model.Message, new { @class = "form-control", @placeholder = "Message" })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <button id="send" type="submit" class="btn btn-warning pull-right">Send <span class="glyphicon glyphicon-send"></span></button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+
+        @*<div style='height:560px;' class="container-fluid testmode">
+            <div class="row-fluid">
+                <div class="col-md-offset-1 col-md-4" id="box">
+                    <h2>寫信給我</h2>
+
+                    <hr>
+
+
+                    <form class="form-horizontal" action="Contact/CreateData" id="contact_form">
+                        <fieldset>
+
+                            <!-- Form Name -->
+                            <!-- Text input-->
+                            <div class="form-group">
+
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                        <input id="Name" name="Name" placeholder="Name" class="form-control" type="text">
+                                    </div> 
+                                </div>
+                            </div>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                        <input name="Email" placeholder="E-Mail Address" class="form-control" type="text">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                                        <input name="Phone" placeholder="Phone number" class="form-control" type="text">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+
+                                <div class="col-md-12 inputGroupContainer">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                        <textarea class="form-control" name="Message" placeholder="Message"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+
+                                <div class="col-md-12">
+                                    <button id="send" type="submit" class="btn btn-warning pull-right">Send <span class="glyphicon glyphicon-send"></span></button>
+                                </div>
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>*@
+
+
+
+    <script>
+    $(function () {
+        var MessageSend = '@ViewBag.MessageSend';
+            console.log(MessageSend);
+            if (MessageSend == "Success") {
+                $("#fakebutton").click();
+            }
+
+            //var count;
+            ////檢查表單中各項目
+            //var validator = $("#contact_form").validate({
+            //    rules: {
+            //        Name: { required: true },
+            //        Email: { required: true } ,
+            //        Phone: { required: true } ,
+            //        Message: { required: true }
+            //    },
+            //    invalidHandler: function () {
+            //        $('#total').text("尚有 " + validator.numberOfInvalids() + " 項目未填");
+            //        count = validator.numberOfInvalids();
+            //    }
+            //})
+
+
+
+            //$("#send").click(function () {
+            //    $(this).html('Send <i class="fa fa-spinner fa-spin"></i>');
+            //    console.log(count);
+
+            //})
+
+
+        });
+    </script>

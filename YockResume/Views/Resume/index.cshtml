@@ -2,41 +2,54 @@
     Layout = null;
 }*@
 
-<!DOCTYPE html>
+@{
+    ViewBag.Title = "Resume";
+}
 
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Yock's Resume</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/MicrosoftMvc")
-    @Scripts.Render("~/bundles/jqueryTemplates")
 
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    
+    <style type="text/css">
+        /*Author: Kosmom.ru*/.loading,.loading>td,.loading>th,.nav li.loading.active>a,.pagination li.loading,.pagination>li.active.loading>a,.pager>li.loading>a{
+            background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0) 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0));
+            background-size: 40px 40px;
+            animation: 2s linear 0s normal none infinite progress-bar-stripes;
+            -webkit-animation: progress-bar-stripes 2s linear infinite;
+        }
+        .btn.btn-default.loading,input[type="text"].loading,select.loading,textarea.loading,.well.loading,.list-group-item.loading,.pagination>li.active.loading>a,.pager>li.loading>a{
+            background-image: linear-gradient(45deg, rgba(235, 235, 235, 0.15) 25%, rgba(0, 0, 0, 0) 25%, rgba(0, 0, 0, 0) 50%, rgba(235, 235, 235, 0.15) 50%, rgba(235, 235, 235, 0.15) 75%, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0));
+        }
+        .head_blue {
+            border:1px solid #000000;
+            height:30px;
+            text-align:center;
+            font-size:24px;
+            font-weight:bold;
+            color:white;
+            background-color:#200090;
+        }
+    </style>
 
-</head>
-<body>
-    @*@Html.ActionLink("download pdf", "DownloadPdf")
-    @Html.ActionLink("download exl", "CreateExcel")*@
-    <a href="/DownloadPDF/CreatePDF">Download PDF</a>
-    <a href="/DownloadExcel/CreateExcel">Download Excel</a>
+
+
+
+    @*<a href="/DownloadPDF/CreatePDF">Download PDF</a>
+    <a href="/DownloadExcel/CreateExcel">Download Excel</a>*@
+    <br/>
+
+    @*From http://bootsnipp.com/snippets/featured/animation-loading-state*@
+    <a href="/DownloadPDF/CreatePDF?files=resume" class="btn btn-warning loading">Download PDF</a>
+
     
     <table style='width:100%;'>
         <tr>
-            <td style='text-align:center; height:90px; font-weight:bold;' class="testmode"><h1>履歷表</h1></td>
+            <td style='text-align:center; height:90px;' class="testmode"><h1>履歷表</h1></td>
         </tr>
         <tr>
             <td style='vertical-align:top; font-size:20px;' class="testmode">
                 <table id="MyTable" style='border:1px solid #000000; width:100%;' cellpadding='0' cellspacing='0'>
                     <tr>
-                        <td colspan=" 5" style='border:1px solid #000000; height:50px; text-align:center; font-size:24px; font-weight:bold; color:white; background-color:#200090;'>
-                    基本資料
-</td>
+                        <td colspan=" 5" class="head_blue">基本資料</td>
                     </tr>
                     <tr>
                         <td rowspan="6" style='border:1px solid #000000; width:20%; text-align:center; font-size:20px;'><img src="../images/YC_.jpg" alt="..."></td>
@@ -78,7 +91,7 @@
                     <tr>
                         <td style='border:1px solid #000000; width:10%; text-align:center;'>興趣</td>
                         <td colspan="3" style='border:1px solid #000000; width:70%; text-align:left; padding-left:15px;'>
-                            平時喜歡聽音樂、看電影，假日時常常約朋友騎單車到較遠的地方看風景吹吹風，一方面可以增強體力，另外也能紓解平日累積的壓力。
+                            平時喜歡聽音樂、看電影、逛網頁，假日時常約朋友騎單車到較遠的地方看看風景，一來可以增強體力，另外也能紓解平日累積的壓力。
                         </td>
                     </tr>
                 </table>
@@ -89,7 +102,7 @@
             <td style='vertical-align:top; font-size:20px;' class="testmode">
                 <table style='border:1px solid #000000; width:100%;' cellpadding='0' cellspacing='0'>
                     <tr>
-                        <td colspan="4" style='border:1px solid #000000; height:50px; text-align:center; font-size:24px; font-weight:bold; color:white; background-color:#200090;'>學歷</td>
+                        <td colspan="4" class="head_blue">學歷</td>
                     </tr>
                     <tr style='height:40px;'>
                         <td style='border:1px solid #000000; width:16%; text-align:center;'></td>
@@ -111,7 +124,7 @@
             <td style='vertical-align:top; font-size:20px;' class="testmode">
                 <table style='border:1px solid #000000; width:100%;' cellpadding='0' cellspacing='0'>
                     <tr>
-                        <td colspan="2" style='border:1px solid #000000; height:50px; text-align:center; font-size:24px; font-weight:bold; color:white; background-color:#200090;'>專長與技能</td>
+                        <td colspan="2" class="head_blue">專長與技能</td>
                     </tr>
                     <tr style='height:40px;'>
                         <td style='border:1px solid #000000; width:20%; text-align:center;'>程式語言</td>
@@ -133,7 +146,7 @@
             <td style='vertical-align:top; font-size:20px;' class="testmode">
                 <table style='border:1px solid #000000; width:100%;' cellpadding='0' cellspacing='0'>
                     <tr>
-                        <td colspan="3" style='border:1px solid #000000; height:50px; text-align:center; font-size:24px; font-weight:bold; color:white; background-color:#200090;'>工作經歷</td>
+                        <td colspan="3" class="head_blue">工作經歷</td>
                     </tr>
                     <tr style='height:40px;'>
                         <td style='border:1px solid #000000; width:20%; text-align:center;'>服務單位</td>
@@ -158,7 +171,7 @@
             <td style='vertical-align:top; font-size:20px;' class="testmode">
                 <table style='border:1px solid #000000; width:100%;' cellpadding='0' cellspacing='0'>
                     <tr>
-                        <td colspan="2" style='border:1px solid #000000; height:50px; text-align:center; font-size:24px; font-weight:bold; color:white; background-color:#200090;'>個人優缺點</td>
+                        <td colspan="2" class="head_blue">個人優缺點</td>
                     </tr>
                     <tr style='height:40px;'>
                         <td style='border:1px solid #000000; width:20%; text-align:center;'>優點</td>
@@ -184,6 +197,4 @@
             </td>
         </tr>
     </table>
-</body>
-</html>
 

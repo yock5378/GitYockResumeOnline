@@ -26,20 +26,33 @@ namespace YockResume.Controllers
         /// 執行此Url，下載PDF檔案
         /// </summary>
         /// <returns></returns>
-        public ActionResult CreatePDF()
+        public ActionResult CreatePDF(string files)
         {
             WebClient wc = new WebClient();
+            string htmlText;
+            string filename;
             //從網址下載Html字串
             //string htmlText = ToBase64("http://yockresumeonline.apphb.com/html/PDFprint_resume.html");
 
-            string htmlText = Server.MapPath("../html/PDFprint_resume.html");
+            if (files == "resume")
+            {
+                htmlText = Server.MapPath("../html/PDFprint_resume.html");
+                filename = "YockResume.pdf";
+            }
+            else if (files == "autobiography")
+            {
+                htmlText = Server.MapPath("../html/PDFprint_autobiography.html");
+                filename = "YockAutobiography.pdf";
+            }
+            else
+                return RedirectToAction("Index", "Home");
             htmlText = wc.DownloadString(htmlText);
             string fronturl = System.Configuration.ConfigurationManager.AppSettings["FrontendURL"];
             htmlText = htmlText.Replace("xxxfrontendxxx", fronturl);
             byte[] pdfFile = this.ConvertHtmlTextToPDF(htmlText);     //Html轉為PDF
             //byte[] pdfFile = this.CreateTextToPDF();                    //自己寫PDF
 
-            return File(pdfFile, "application/pdf", "YockResume.pdf");
+            return File(pdfFile, "application/pdf", filename);
         }
 
         private string ToBase64(string htmlText)

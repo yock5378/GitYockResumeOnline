@@ -1,18 +1,7 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "About Yock";
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Yock's Resume</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
 
 
     <style type="text/css">
@@ -44,7 +33,7 @@
         .Reply_imgNewPostion {
             position: absolute;
             width: 50%;
-            top: 25%;
+            top: 35%;
             left: 0%;
             z-index: 1;
         }
@@ -52,7 +41,7 @@
         .replyTextNewPostion {
             position: absolute;
             width: 40%;
-            top: 35%;
+            top: 45%;
             left: 5%;
             margin-right: 60px;
             z-index: 2;
@@ -69,7 +58,7 @@
         .questionTextPostion {
             position: absolute;
             width: 42%;
-            top: 8%;
+            top: 12%;
             left: 105%;
             margin-right: 60px;
             z-index: 2;
@@ -139,8 +128,8 @@
             position: relative;
             max-width: 1200px;
             min-width: 1200px;
-            max-height: 850px;
-            min-height: 850px;
+            max-height: 600px;
+            min-height: 600px;
             margin: 0 auto;
         }
 
@@ -172,11 +161,9 @@
         }
     </style>
 
-</head>
-<body>
 
+    <br />
     <div class="midStyle testmode">
-        <br />
         <img id="YC_img" src="../images/YC.jpg" alt="an image" class="picPosition">
         <img id="Reply_img" src="../images/Reply.png" alt="an image" class="Reply_imgPostion">
         <img id="Question_img" src="../images/Question.png" alt="an image" class="Question_imgPostion unDisplayStyle">
@@ -268,14 +255,14 @@
             //點選時此按鍵淡出，原按鍵淡入
             function animate_inout(action_in, action_out) {
                 if(action_in != null) {
-                    $("img[name = q_img]").eq(action_in-1).fadeOut(1000);
-                    $("span[name = q_text]").eq(action_in-1).fadeOut(1000, function(){
+                    $("img[name = q_img]").eq(action_in-1).fadeOut(500);
+                    $("span[name = q_text]").eq(action_in-1).fadeOut(500, function(){
                         action_doing = false;
                     })
                 }
                 if (action_out != null) {
-                    $("img[name = q_img]").eq(action_out-1).fadeIn(1000);
-                    $("span[name = q_text]").eq(action_out-1).fadeIn(1000);
+                    $("img[name = q_img]").eq(action_out-1).fadeIn(500);
+                    $("span[name = q_text]").eq(action_out-1).fadeIn(500);
                 }
             }
 
@@ -314,5 +301,3 @@
         });
     </script>
 
-</body>
-</html>
